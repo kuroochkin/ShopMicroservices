@@ -31,7 +31,5 @@ public class CreateProductEndpoint : ICarterModule
         .ProducesProblem(StatusCodes.Status404NotFound)
         .WithSummary("CreateProduct")
         .WithDescription("CreateProduct");
-        
-        throw new NotImplementedException();
     }
 }
