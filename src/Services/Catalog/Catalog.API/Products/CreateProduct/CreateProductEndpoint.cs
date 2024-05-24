@@ -29,7 +29,7 @@ public class CreateProductEndpoint : ICarterModule
         .WithName("CreateProduct")
         .Produces<CreateProductResponse>(StatusCodes.Status201Created)
         .ProducesProblem(StatusCodes.Status404NotFound)
-        .WithSummary("CreateProduct")
-        .WithDescription("CreateProduct");
+        .WithSummary("Create Product")
+        .WithDescription("Create Product");
     }
 }
