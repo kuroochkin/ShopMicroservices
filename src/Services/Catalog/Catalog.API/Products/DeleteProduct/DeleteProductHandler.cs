@@ -1,5 +1,7 @@
 ﻿using BuildingBlocks.CQRS;
 using Catalog.API.Models;
+using Catalog.API.Products.CreateProduct;
+using FluentValidation;
 using Marten;
 
 namespace Catalog.API.Products.DeleteProduct;
