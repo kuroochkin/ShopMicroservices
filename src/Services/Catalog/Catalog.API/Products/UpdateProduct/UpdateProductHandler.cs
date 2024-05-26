@@ -1,7 +1,6 @@
 ﻿using BuildingBlocks.CQRS;
 using Catalog.API.Exceptions;
 using Catalog.API.Models;
-using Catalog.API.Products.GetProductByCategory;
 using Marten;
 
 namespace Catalog.API.Products.UpdateProduct;
@@ -34,7 +33,7 @@ internal class UpdateProductHandler
         UpdateProductCommand command, 
         CancellationToken cancellationToken)
     {
-        _logger.LogInformation("GetProductByIdQueryHandler.Handle called with {@Command}", command);
+        _logger.LogInformation("UpdateProductHandler.Handle called with {@Command}", command);
         
         var product = await _session.LoadAsync<Product>(command.Id, cancellationToken);
         
