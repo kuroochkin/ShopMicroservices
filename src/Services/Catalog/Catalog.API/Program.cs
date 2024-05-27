@@ -1,5 +1,6 @@
 using BuildingBlocks.Behaviors;
 using Carter;
+using Catalog.API.Data;
 using FluentValidation;
 using Marten;
 using Microsoft.AspNetCore.Diagnostics;
@@ -7,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddCarter();
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(typeof(Program).Assembly);
@@ -17,10 +17,15 @@ builder.Services.AddMediatR(config =>
 
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 
+builder.Services.AddCarter();
+
 builder.Services.AddMarten(options =>
 {
     options.Connection(builder.Configuration.GetConnectionString("Database")!);
 }).UseLightweightSessions();
+
+if (builder.Environment.IsDevelopment())
+    builder.Services.InitializeMartenWith<CatalogInitialData>();
 
 var app = builder.Build();
 
