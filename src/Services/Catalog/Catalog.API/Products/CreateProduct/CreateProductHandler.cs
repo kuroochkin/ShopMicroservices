@@ -30,7 +30,6 @@ internal class CreateProductHandler
     : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
     private readonly IDocumentSession _session;
-    private readonly IValidator<CreateProductCommand> _validator;
 
     public CreateProductHandler(IDocumentSession session) =>
         _session = session;
