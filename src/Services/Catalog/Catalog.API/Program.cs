@@ -1,6 +1,7 @@
 using BuildingBlocks.Behaviors;
 using Carter;
 using Catalog.API.Data;
+using Catalog.API.Swagger;
 using FluentValidation;
 using HealthChecks.UI.Client;
 using Marten;
@@ -20,6 +21,7 @@ builder.Services.AddMediatR(config =>
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 
 builder.Services.AddCarter();
+builder.Services.AddSwagger();
 
 builder.Services.AddMarten(options =>
 {
@@ -33,6 +35,12 @@ builder.Services.AddHealthChecks()
     .AddNpgSql(builder.Configuration.GetConnectionString("Database")!);
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.MapCarter();
 
