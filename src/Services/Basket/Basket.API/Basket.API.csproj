@@ -20,6 +20,7 @@
     <ItemGroup>
       <PackageReference Include="Carter" Version="7.2.0" />
       <PackageReference Include="Marten" Version="7.18.0" />
+      <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="7.0.2" />
       <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.6.2" />
       <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.6.2" />
     </ItemGroup>
