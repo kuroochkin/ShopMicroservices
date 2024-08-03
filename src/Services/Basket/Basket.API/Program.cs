@@ -40,7 +40,7 @@ builder.Services.AddStackExchangeRedisCache(options =>
 
 builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(options =>
 {
-    options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]);
+    options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
 });
 
 builder.Services.AddHealthChecks()
