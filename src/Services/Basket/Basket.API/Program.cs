@@ -3,6 +3,7 @@ using Basket.API.Models;
 using Basket.API.Swagger;
 using BuildingBlocks.Behaviors;
 using Carter;
+using Discount.Grpc;
 using HealthChecks.UI.Client;
 using Marten;
 using Microsoft.AspNetCore.Diagnostics;
@@ -35,6 +36,11 @@ builder.Services.Decorate<IBasketRepository, CachedBasketRepository>();
 builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.Configuration = builder.Configuration.GetConnectionString("Redis");
+});
+
+builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(options =>
+{
+    options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]);
 });
 
 builder.Services.AddHealthChecks()
