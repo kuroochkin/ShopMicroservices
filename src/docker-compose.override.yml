@@ -29,47 +29,64 @@ services:
     restart: always
     ports:
       - "6379:6379"
+  
+  orderdb:
+    container_name: orderdb
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Dqw23hgbH37
+    restart: always
+    ports:
+      - "1433:1433"
+  
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
       
-  basket.api:
-    container_name: basketapi
-    image: ${DOCKER_REGISTRY-}basketapi
-    build:
-      context: .
-      dockerfile: Services/Basket/Basket.API/Dockerfile
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__Database=Server=basketdb;Port=5432;Database=CatalogDb;User Id=postgres;Password=postgres;Include Error Detail=true
-      - ConnectionStrings__Database=Redis=distributedcache:6379
-      - GrpcSettings__DiscountUrl=https://discount.grpc:8081
-    depends_on:
-      - basketdb
-      - distributedcache
-      - discount.grpc
-    ports:
-      - "6001:8080"
-      - "6061:8081"
-
-  catalog.api:
-    container_name: catalogapi
-    image: ${DOCKER_REGISTRY-}catalogapi
-    build:
-      context: .
-      dockerfile: Services/Catalog/Catalog.API/Dockerfile
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__Database=Server=catalogdb;Port=5432;Database=CatalogDb;User Id=postgres;Password=postgres;Include Error Detail=true
-    depends_on:
-      - catalogdb
-    ports:
-      - "6000:8080"
-      - "6060:8081"
-
-  discount.grpc:
-    container_name: discount.grpc
-    image: ${DOCKER_REGISTRY-}discount.grpc
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__Database=Data Source=discountdb
-    ports:
-      - "6002:8080"
-      - "6062:8081"
+#  basket.api:
+#    container_name: basketapi
+#    image: ${DOCKER_REGISTRY-}basketapi
+#    build:
+#      context: .
+#      dockerfile: Services/Basket/Basket.API/Dockerfile
+#    environment:
+#      - ASPNETCORE_ENVIRONMENT=Development
+#      - ConnectionStrings__Database=Server=basketdb;Port=5432;Database=CatalogDb;User Id=postgres;Password=postgres;Include Error Detail=true
+#      - ConnectionStrings__Database=Redis=distributedcache:6379
+#      - GrpcSettings__DiscountUrl=https://discount.grpc:8081
+#    depends_on:
+#      - basketdb
+#      - distributedcache
+#      - discount.grpc
+#    ports:
+#      - "6001:8080"
+#      - "6061:8081"
+#
+#  catalog.api:
+#    container_name: catalogapi
+#    image: ${DOCKER_REGISTRY-}catalogapi
+#    build:
+#      context: .
+#      dockerfile: Services/Catalog/Catalog.API/Dockerfile
+#    environment:
+#      - ASPNETCORE_ENVIRONMENT=Development
+#      - ConnectionStrings__Database=Server=catalogdb;Port=5432;Database=CatalogDb;User Id=postgres;Password=postgres;Include Error Detail=true
+#    depends_on:
+#      - catalogdb
+#    ports:
+#      - "6000:8080"
+#      - "6060:8081"
+#
+#  discount.grpc:
+#    container_name: discount.grpc
+#    image: ${DOCKER_REGISTRY-}discount.grpc
+#    environment:
+#      - ASPNETCORE_ENVIRONMENT=Development
+#      - ConnectionStrings__Database=Data Source=discountdb
+#    ports:
+#      - "6002:8080"
+#      - "6062:8081"
