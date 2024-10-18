@@ -50,8 +50,7 @@ public class StoreBasketCommandHandler
         {
             var coupon =
                 await _discountProto.GetDiscountAsync(
-                    new GetDiscountRequest { ProductName = item.ProductName },
-                    cancellationToken);
+                    new GetDiscountRequest { ProductName = item.ProductName });
             
             item.Price -= coupon.Amount;
         }
