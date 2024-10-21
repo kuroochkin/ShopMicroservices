@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Ordering.Application.Data;
 using Ordering.Domain.Models;
+using Ordering.Infrastructure.Data.Configurations;
 
 namespace Ordering.Infrastructure.Data;
 
@@ -22,7 +23,11 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        builder.ApplyConfiguration(new OrderConfiguration());
+        builder.ApplyConfiguration(new ProductConfiguration());
+        builder.ApplyConfiguration(new CustomerConfiguration());
+        builder.ApplyConfiguration(new OrderItemConfiguration());
+
         base.OnModelCreating(builder);
     }
 }
