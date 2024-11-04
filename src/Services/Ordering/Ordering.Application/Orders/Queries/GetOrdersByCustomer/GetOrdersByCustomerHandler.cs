@@ -19,7 +19,7 @@ public class GetOrdersByCustomerHandler
     {
         // get orders by customer using dbContext
         // return result
-
+        
         var orders = await _dbContext.Orders
             .Include(o => o.OrderItems)
             .AsNoTracking()
