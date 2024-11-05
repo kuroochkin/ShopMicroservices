@@ -37,3 +37,21 @@ services:
     - "D:\\proga\\ShopMicroservices\\src\\Services\\Catalog\\Catalog.API:/app:rw"
     - "D:\\proga\\ShopMicroservices\\src:/src:rw"
     working_dir: "/app"
+  ordering.api:
+    build:
+      context: "D:\\proga\\ShopMicroservices\\src"
+      dockerfile: "Services/Ordering/Ordering.API/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net7.0/Ordering.API.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "orderingapi:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\pin11\\.nuget\\packages:/root/.nuget/packages"
+    - "D:\\proga\\ShopMicroservices\\src\\Services\\Ordering\\Ordering.API:/app:rw"
+    - "D:\\proga\\ShopMicroservices\\src:/src:rw"
+    working_dir: "/app"
